@@ -56,11 +56,11 @@ Sub GenerateAllOutput()
     For i = 1 To Sheets("Inputs").ListObjects("tbl_Inputs").DataBodyRange.Rows.Count
         Sheets("Model").Range("ItemIndex").Value = i
         Application.StatusBar = "Writing " & Sheets("Model").Range("ItemName")
-        AdjustNumberOfModelListRows
         Application.Calculate
         Do While Application.CalculationState = xlCalculating
         Loop
         Application.Wait (Now + TimeValue("0:00:01"))
+        AdjustNumberOfModelListRows
         dblFirstEmptyCell = WorksheetFunction.CountA(Sheets("Output").Range("A:A")) + 1
         lo.DataBodyRange.Copy
         Sheets("Output").Cells(dblFirstEmptyCell, 1).PasteSpecial xlPasteValues
